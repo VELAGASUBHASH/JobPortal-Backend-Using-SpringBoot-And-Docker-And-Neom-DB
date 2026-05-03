@@ -31,7 +31,7 @@ public class UserController {
     }
 
     @GetMapping("/application")
-    public List<JobApplication> getMyApplication(@AuthenticationPrincipal User user){
-        return jobApplicationService.getUserApplications(user.getId());
-    }
+    public List<JobApplication> getMyApplication(@AuthenticationPrincipal UserDetails userDetails){
+    return jobApplicationService.getUserApplications(userDetails.getUsername());
+}
 }
