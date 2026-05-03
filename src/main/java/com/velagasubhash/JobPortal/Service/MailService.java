@@ -15,7 +15,7 @@ public class MailService {
         SimpleMailMessage message = new SimpleMailMessage();
         message.setTo(to);
         message.setSubject("Verify Your Account");
-        message.setText("Click: http://localhost:8080/auth/verify?token=" + token);
+        message.setText("Click: https://jobportalbackend-celm.onrender.com/auth/verify?token=" + token);
 
         mailSender.send(message);
     }
