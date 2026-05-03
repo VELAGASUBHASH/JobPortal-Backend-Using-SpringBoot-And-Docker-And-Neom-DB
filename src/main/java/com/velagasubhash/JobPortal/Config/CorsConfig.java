@@ -16,7 +16,7 @@ public class CorsConfig {
                 registry.addMapping("/**") 
                         .allowedOrigins(
                                 "http://localhost:5173",
-                                "https://your-future-frontend-domain.vercel.app" // Add your production frontend URL later!
+                                "https://risepath-one.vercel.app"
                         )
                         .allowedMethods("GET", "POST", "PUT", "DELETE", "OPTIONS") 
                         .allowedHeaders("*") 
