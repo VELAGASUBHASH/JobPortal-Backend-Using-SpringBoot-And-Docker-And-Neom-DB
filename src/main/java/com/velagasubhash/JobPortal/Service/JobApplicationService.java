@@ -46,7 +46,9 @@ public class JobApplicationService {
         return jobApplicationRepository.findByUserId(userId);
     }
 
-    public List<JobApplication> getUserApplications(Long userId) {
-        return jobApplicationRepository.findByUserId(userId);
+    public List<JobApplication> getUserApplications(String email) {
+        User user = userRepository.findByEmail(email)
+                .orElseThrow(() -> new RuntimeException("User Not Found"));
+        return jobApplicationRepository.findByUserId(user.getId());
     }
 }
