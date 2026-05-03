@@ -31,7 +31,13 @@ public class AuthService {
         repository.save(user);
 
         String token = jwtUtils.generateJWT(email);
-        mailService.sentVerificationMail(email,token);
+        try {
+            mailService.sentVerificationMail(email,token);
+            System.out.println("SUCCESS: Verification email sent to " + email);
+        } catch (Exception e) {
+            System.err.println("CRITICAL EMAIL ERROR: " + e.getMessage());
+            e.printStackTrace(); 
+        }
     }
 
     public String login(String email, String password){
