@@ -32,7 +32,7 @@ public class SecurityConfig {
 
                         .requestMatchers(HttpMethod.OPTIONS, "/**").permitAll() 
                         
-
+                        .requestMatchers("/admin/job/alljobs").permitAll()
                         .requestMatchers("/auth/**", "/error").permitAll()
                         .requestMatchers("/admin/**").hasRole("ADMIN")
                         .requestMatchers("/user/**").hasRole("USER")
