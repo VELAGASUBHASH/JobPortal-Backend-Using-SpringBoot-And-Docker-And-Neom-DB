@@ -25,15 +25,17 @@ public class ApplicationManagementService {
         application.setApplicationStatus(status);
         JobApplication update = jobApplicationRepository.save(application);
         try {
-            if(status == ApplicationStatus.HIRED){
-                mailService.sendApprovalMail(email,jobTitle);
-            }else if(status == ApplicationStatus.SHORTLISTED){
-                mailService.sendInProcessMail(email,jobTitle);
-            }else if(status == ApplicationStatus.REJECTED){
-                mailService.sendRejectedMail(email,jobTitle);
+            if (email != null) {
+                if(status == ApplicationStatus.HIRED){
+                    mailService.sendApprovalMail(email, jobTitle);
+                } else if(status == ApplicationStatus.SHORTLISTED){
+                    mailService.sendInProcessMail(email, jobTitle);
+                } else if(status == ApplicationStatus.REJECTED){
+                    mailService.sendRejectedMail(email, jobTitle);
+                }
             }
         } catch (Exception e) {
-            System.err.println("Email failed to send, but status was updated: " + e.getMessage());
+            System.err.println("⚠️ Email failed to send, but status was updated successfully: " + e.getMessage());
         }
         
         return update;
