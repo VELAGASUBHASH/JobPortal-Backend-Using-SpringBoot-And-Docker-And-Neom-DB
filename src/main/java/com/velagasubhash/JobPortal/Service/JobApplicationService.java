@@ -42,8 +42,8 @@ public class JobApplicationService {
         return saved;
     }
 
-    public List<JobApplication> getAllUserApplications(Long userId){
-        return jobApplicationRepository.findByUserId(userId);
+    public List<JobApplication> getAllUserApplications() {
+        return jobApplicationRepository.findAll(); 
     }
 
     public List<JobApplication> getUserApplications(String email) {
