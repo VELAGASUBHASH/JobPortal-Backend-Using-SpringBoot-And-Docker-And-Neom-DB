@@ -2,5 +2,6 @@ package com.velagasubhash.JobPortal.Model;
 
 public enum JobStatus {
     OPEN,
-    CLOSED
+    CLOSED,
+    PAUSED
 }
