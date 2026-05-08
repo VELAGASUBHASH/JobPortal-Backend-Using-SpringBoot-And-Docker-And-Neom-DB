@@ -24,11 +24,11 @@ public class ApplicationManagementService {
         String jobTitle = application.getJob().getTitle();
         application.setApplicationStatus(status);
         JobApplication update = jobApplicationRepository.save(application);
-        if(status==ApplicationStatus.APPROVED){
+        if(status == ApplicationStatus.HIRED){
             mailService.sendApprovalMail(email,jobTitle);
-        }else if(status==ApplicationStatus.INPROCESS){
+        }else if(status == ApplicationStatus.SHORTLISTED){
             mailService.sendInProcessMail(email,jobTitle);
-        }else if(status==ApplicationStatus.REJECTED){
+        }else if(status == ApplicationStatus.REJECTED){
             mailService.sendRejectedMail(email,jobTitle);
         }
         return update;
