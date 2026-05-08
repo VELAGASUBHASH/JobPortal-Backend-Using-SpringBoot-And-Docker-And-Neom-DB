@@ -19,23 +19,21 @@ public class ApplicationManagementService {
         JobApplication application = jobApplicationRepository.findById(appId)
                 .orElseThrow(()-> new RuntimeException("No Application Found"));
 
+        String email = (application.getUser() != null) ? application.getUser().getEmail() : null;
+        String jobTitle = (application.getJob() != null) ? application.getJob().getTitle() : "a job";
 
-        String email = application.getUser().getEmail();
-        String jobTitle = application.getJob().getTitle();
         application.setApplicationStatus(status);
         JobApplication update = jobApplicationRepository.save(application);
-        try {
-            if (email != null) {
-                if(status == ApplicationStatus.HIRED){
-                    mailService.sendApprovalMail(email, jobTitle);
-                } else if(status == ApplicationStatus.SHORTLISTED){
-                    mailService.sendInProcessMail(email, jobTitle);
-                } else if(status == ApplicationStatus.REJECTED){
-                    mailService.sendRejectedMail(email, jobTitle);
-                }
+        
+
+        if (email != null) {
+            if(status == ApplicationStatus.HIRED){
+                mailService.sendApprovalMail(email, jobTitle);
+            } else if(status == ApplicationStatus.SHORTLISTED){
+                mailService.sendInProcessMail(email, jobTitle);
+            } else if(status == ApplicationStatus.REJECTED){
+                mailService.sendRejectedMail(email, jobTitle);
             }
-        } catch (Exception e) {
-            System.err.println("⚠️ Email failed to send, but status was updated successfully: " + e.getMessage());
         }
         
         return update;
@@ -44,5 +42,4 @@ public class ApplicationManagementService {
     public List<JobApplication> getApplicationByJob(Long jobId){
         return jobApplicationRepository.findByJobJobId(jobId);
     }
-
 }
