@@ -24,13 +24,18 @@ public class ApplicationManagementService {
         String jobTitle = application.getJob().getTitle();
         application.setApplicationStatus(status);
         JobApplication update = jobApplicationRepository.save(application);
-        if(status == ApplicationStatus.HIRED){
-            mailService.sendApprovalMail(email,jobTitle);
-        }else if(status == ApplicationStatus.SHORTLISTED){
-            mailService.sendInProcessMail(email,jobTitle);
-        }else if(status == ApplicationStatus.REJECTED){
-            mailService.sendRejectedMail(email,jobTitle);
+        try {
+            if(status == ApplicationStatus.HIRED){
+                mailService.sendApprovalMail(email,jobTitle);
+            }else if(status == ApplicationStatus.SHORTLISTED){
+                mailService.sendInProcessMail(email,jobTitle);
+            }else if(status == ApplicationStatus.REJECTED){
+                mailService.sendRejectedMail(email,jobTitle);
+            }
+        } catch (Exception e) {
+            System.err.println("Email failed to send, but status was updated: " + e.getMessage());
         }
+        
         return update;
     }
 
