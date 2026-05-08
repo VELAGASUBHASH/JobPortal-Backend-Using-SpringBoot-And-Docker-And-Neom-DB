@@ -41,6 +41,9 @@ public class JobService {
         job.setSalary(updatejob.getSalary());
         job.setJobStatus(updatejob.getJobStatus());
 
+        job.setJobType(updatejob.getJobType());
+        job.setRequiredSkills(updatejob.getRequiredSkills());
+
         return jobRepository.save(job);
     }
 
