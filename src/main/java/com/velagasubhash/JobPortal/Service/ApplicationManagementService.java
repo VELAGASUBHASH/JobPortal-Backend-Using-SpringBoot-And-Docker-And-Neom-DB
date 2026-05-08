@@ -26,10 +26,10 @@ public class ApplicationManagementService {
         JobApplication update = jobApplicationRepository.save(application);
         
 
-        if (email != null) {
-            if(status == ApplicationStatus.HIRED){
+       if (email != null) {
+            if(status == ApplicationStatus.APPROVED){
                 mailService.sendApprovalMail(email, jobTitle);
-            } else if(status == ApplicationStatus.SHORTLISTED){
+            } else if(status == ApplicationStatus.INPROCESS){
                 mailService.sendInProcessMail(email, jobTitle);
             } else if(status == ApplicationStatus.REJECTED){
                 mailService.sendRejectedMail(email, jobTitle);
