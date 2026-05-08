@@ -27,7 +27,7 @@ public class AdminApplicationController {
     }
 
     @GetMapping("/getAllApplication")
-    public List<JobApplication> getAllApplications(@PathVariable Long id){
-        return jobApplicationService.getAllUserApplications(id);
+    public List<JobApplication> getAllApplications(){
+        return jobApplicationService.getAllUserApplications();
     }
 }
