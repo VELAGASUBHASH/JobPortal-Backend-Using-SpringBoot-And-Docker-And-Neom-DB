@@ -6,6 +6,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import java.util.List; 
 
 @Entity
 @NoArgsConstructor
@@ -26,6 +27,10 @@ public class Job {
     private Double salary;
     @Enumerated(EnumType.STRING)
     private JobStatus jobStatus;
+
+    private String jobType;
+    @ElementCollection
+    private List<String> requiredSkills;
 
     @ManyToOne
     private User createdBy;
